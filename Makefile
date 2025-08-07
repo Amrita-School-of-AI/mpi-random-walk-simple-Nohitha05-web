@@ -1,3 +1,6 @@
+# Makefile for MPI Random Walk
+# Note: Run 'module load mpi/openmpi-x86_64' before using this Makefile
+
 # Compiler: Use the MPI C++ wrapper
 CXX = mpic++
 
@@ -19,3 +22,7 @@ $(TARGET): $(SRCS)
 # Command to clean up compiled files
 clean:
 	rm -f $(TARGET)
+
+# Target to run the program (example usage)
+run: $(TARGET)
+	mpirun --oversubscribe -np 4 ./$(TARGET) 20 1000
