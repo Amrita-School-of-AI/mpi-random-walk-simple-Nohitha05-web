@@ -15,6 +15,9 @@ EXEC="./random_walk"
 # Format: <domain_size> <max_walk_iterations>
 ARGS="20 1000"
 
+# Make the executable file runnable
+chmod +x $EXEC
+
 # --- Test Execution ---
 # Run the MPI program and capture its standard output
 echo "Running command: mpirun --oversubscribe -np $NP $EXEC $ARGS"
@@ -33,6 +36,8 @@ if [ "$COUNT" -eq "$EXPECTED_COUNT" ]; then
     echo "✅ Test Passed: Found $COUNT 'finished' messages, as expected."
     echo "--- Program Output ---"
     echo "$OUTPUT"
+    # Finalize the MPI environment
+    MPI_Finalize();
     exit 0 # Success
 else
     echo "❌ Test Failed: Expected $EXPECTED_COUNT 'finished' messages, but found $COUNT."
